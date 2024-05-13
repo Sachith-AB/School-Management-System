@@ -40,6 +40,7 @@ export const updateStudent = async (req,res,next)=>{
                 name:req.body.name,
                 age:req.body.age,
                 gender:req.body.gender,
+                address:req.body.address,
                 scheme:req.body.scheme,
                 phoneNumber:req.body.phoneNumber,
                 email:req.body.email
