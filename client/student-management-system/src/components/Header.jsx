@@ -23,7 +23,7 @@ export default function Header() {
             School Management System
           </span>
         </Link>
-      <div className='max-w-screen-xl flex flex-wrap justify-between mx-auto p-4'>
+      <div className='max-w-screen-xl flex flex-wrap  mx-auto p-4'>
         
         <Button
           onClick={() => toggleDropdown()}
@@ -44,7 +44,7 @@ export default function Header() {
             <li className='relative'>
               <button
                 onClick={toggleMenu}
-                className='flex justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent'
+                className=' w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent'
               >
                  Menu
                 <svg className='w-2.5 h-2.5 ml-2.5' aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
