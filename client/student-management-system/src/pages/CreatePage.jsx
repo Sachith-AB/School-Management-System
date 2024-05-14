@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
+
 export default function CreatePage() {
   const[formData,setFormData]=useState({});
 
@@ -11,7 +12,8 @@ export default function CreatePage() {
       try{
         const res=await axios.post('http://localhost:4000/api/student/add',formData);
         alert("student added");
-        console.log(res.data);
+       
+        setFormData(null);
       }
       catch(error){
         alert(error);
@@ -111,6 +113,7 @@ export default function CreatePage() {
     Submit
    </button>
   </form>
+  
   
 </div>
   )
