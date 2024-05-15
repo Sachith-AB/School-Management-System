@@ -17,6 +17,9 @@ export default function Home() {
       try {
         const res = await axios.get('http://localhost:4000/api/student/getstudents');
         setStudents(res.data);
+        console.log(students)
+        
+        
       } catch (error) {
         console.log(error);
       }
@@ -34,7 +37,7 @@ export default function Home() {
     }
   };
 
-  const getStudent = async () => {
+  const handleSubmit = async () => {
     setIsSearching(true);
     try {
       const res = await axios.get(`http://localhost:4000/api/student/getstudent/${searchStudentId}`);
@@ -44,7 +47,8 @@ export default function Home() {
       console.log(error.message);
       setResult(null);
     }
-  };
+  }
+  
 
   return (
     <div className=''>
@@ -69,11 +73,10 @@ export default function Home() {
             placeholder='Enter Student ID'
           />
 
-          <Button className='bg-blue-500 flex ml-1' type='submit' onClick={getStudent}>
+          <Button className='bg-blue-500 flex ml-1' type='submit' onClick={handleSubmit}>
             Submit
           </Button>
         </div>
-
         {isSearching && result && (
           <div className='p-3 mb-4 bg-gray-100 rounded-md shadow-md dark:bg-gray-700'>
             <h4 className='text-lg font-semibold mb-2'>Search Result:</h4>
@@ -91,18 +94,22 @@ export default function Home() {
               <Table.Body>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                   
-                  <Table.Cell>{result.data}</Table.Cell>
-                  <Table.Cell>{result.age}</Table.Cell>
-                  <Table.Cell>{result.address}</Table.Cell>
-                  <Table.Cell>{result.phoneNumber}</Table.Cell>
-                  <Table.Cell>{result.gender}</Table.Cell>
-                  <Table.Cell>{result.scheme}</Table.Cell>
-                  <Table.Cell>{result.email}</Table.Cell>
+                  <Table.Cell>{result.user.name}</Table.Cell>
+                  <Table.Cell>{result.user.age}</Table.Cell>
+                  <Table.Cell>{result.user.address}</Table.Cell>
+                  <Table.Cell>{result.user.phoneNumber}</Table.Cell>
+                  <Table.Cell>{result.user.gender}</Table.Cell>
+                  <Table.Cell>{result.user.scheme}</Table.Cell>
+                  <Table.Cell>{result.user.email}</Table.Cell>
                 </Table.Row>
               </Table.Body>
             </Table>
           </div>
         )}
+
+
+        
+         
 
         {students.length > 0 ? (
           <Table hoverable>
@@ -130,7 +137,7 @@ export default function Home() {
                   <Table.Cell>{student.scheme}</Table.Cell>
                   <Table.Cell>{student.email}</Table.Cell>
                   <Table.Cell>
-                    <Link className='text-green-500 hover:underline' to='/updatestudent'>
+                    <Link className='text-green-500 hover:underline' to={`/updatestudent/${student._id}`}>
                       Edit
                     </Link>
                   </Table.Cell>
@@ -151,6 +158,8 @@ export default function Home() {
         ) : (
           <p>No students yet...</p>
         )}
+
+        
 
         <Modal show={showModal} onClose={() => setShowModal(false)} popupsize='md'>
           <Modal.Header />

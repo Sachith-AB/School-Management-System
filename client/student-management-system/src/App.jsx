@@ -14,7 +14,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/deletestudent" element={<DeletePage/>}/>
-      <Route path="/updatestudent" element={<UpdatePage/>}/>
+      <Route path="/updatestudent/:studentId" element={<UpdatePage/>}/>
       <Route path="/createstudent" element={<CreatePage/>}/>
       <Route path="/search" element={<SearchPage/>}/>
     </Routes>
