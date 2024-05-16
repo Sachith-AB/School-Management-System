@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { useParams } from 'react-router-dom';
 import { Alert } from 'flowbite-react';
-import Student from '../../../../api/models/student.model';
+
 
 
 export default function UpdatePage() {
 const [formData,setFormData]=useState({});
-const [student,setStudent]=useState({});
+const [alert,setAlert]=useState(null);
 
 const {studentId}=useParams();
 
@@ -16,24 +16,8 @@ const {studentId}=useParams();
     const getStudent=async()=>{
       try{
       const res =await axios.get(`http://localhost:4000/api/student/getstudent/${studentId}`);
-           setFormData(res.data)
-           
-          setStudent({
-            id:formData.user._id,
-            name: formData.user.name,
-            age: res.data.age,
-            gender: res.data.gender,
-            address: res.data.address,
-            phoneNumber: res.data.phoneNumber,
-            scheme: res.data.scheme,
-            email: res.data.email
-          });
-         console.log(student.name) 
-      
-      
-      
-      
-      }
+           setFormData(res.data);
+          }
       catch(err){
         console.log(err);
     }
@@ -45,7 +29,9 @@ const {studentId}=useParams();
     e.preventDefault();
     try{
       const res =await axios.put(`http://localhost:4000/api/student/update/${formData.user._id}`,formData);
-      alert("Student has been updated");
+      if(res){
+        setAlert("Student's detail updated sucessfully");
+      }
       
       
     }
@@ -159,7 +145,10 @@ const {studentId}=useParams();
     Update
    </button>
   </form>
-  
+  {alert && (<Alert className='mt-5 bg-green-200 text-gray-700'>
+            {alert}
+            </Alert>
+        )}
   
 </div>
   )
