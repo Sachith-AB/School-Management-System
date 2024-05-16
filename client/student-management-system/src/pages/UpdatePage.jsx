@@ -1,20 +1,37 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Alert } from 'flowbite-react';
+import Student from '../../../../api/models/student.model';
 
 
 export default function UpdatePage() {
 const [formData,setFormData]=useState({});
+const [student,setStudent]=useState({});
 
 const {studentId}=useParams();
-//console.log(studentId)
+
 
  useEffect(()=>{
     const getStudent=async()=>{
       try{
       const res =await axios.get(`http://localhost:4000/api/student/getstudent/${studentId}`);
-      setFormData(res.data);
-      console.log(formData.user._id);
+           setFormData(res.data)
+           
+          setStudent({
+            id:formData.user._id,
+            name: formData.user.name,
+            age: res.data.age,
+            gender: res.data.gender,
+            address: res.data.address,
+            phoneNumber: res.data.phoneNumber,
+            scheme: res.data.scheme,
+            email: res.data.email
+          });
+         console.log(student.name) 
+      
+      
+      
       
       }
       catch(err){
@@ -27,8 +44,10 @@ const {studentId}=useParams();
   const handleSumbit=async(e)=>{
     e.preventDefault();
     try{
-      const res =await axios.put(`http://localhost:4000/api/student/update/${formData.user._id}`);
-      console.log(res.data);
+      const res =await axios.put(`http://localhost:4000/api/student/update/${formData.user._id}`,formData);
+      alert("Student has been updated");
+      
+      
     }
     catch(err){
       console.log(err);
@@ -48,7 +67,7 @@ const {studentId}=useParams();
           ...formData,name:e.target.value
         })
       }}
-      //value={formData.user.name}
+      
       />
     </div>
     <div className="mb-6">
