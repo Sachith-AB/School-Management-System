@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Alert } from 'flowbite-react';
 
 
 
 export default function CreatePage() {
   const[formData,setFormData]=useState({});
+  const [alert,setAlert]=useState(null);
 
   const handleSumbit= async(e)=>{
         e.preventDefault();
         
       try{
         const res=await axios.post('http://localhost:4000/api/student/add',formData);
-        alert("student added");
+        if(res){
+          setAlert("Student added sucessfully");
+        }
        
         setFormData(null);
       }
@@ -113,6 +117,11 @@ export default function CreatePage() {
     Submit
    </button>
   </form>
+
+  {alert && (<Alert className='mt-5 bg-green-200 text-gray-700'>
+            {alert}
+            </Alert>
+        )}
   
   
 </div>
